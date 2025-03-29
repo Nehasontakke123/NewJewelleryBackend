@@ -4,7 +4,7 @@ import express from "express";
 import cors from "cors";
 import dbConnect from "./db/connectDB.js";
 import repairRoutes from "./routes/repairRoutes.js";
-import paymentRoutes from "./routes/paymentRoutes.js";
+// import paymentRoutes from "./routes/paymentRoutes.js";
 
 // ✅ Connect to MongoDB
 dbConnect(process.env.DBURL, process.env.DBNAME);
