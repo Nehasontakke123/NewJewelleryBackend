@@ -5,6 +5,7 @@ import cors from "cors";
 import dbConnect from "./db/connectDB.js";
 import repairRoutes from "./routes/repairRoutes.js";
 // import paymentRoutes from "./routes/paymentRoutes.js";
+import jewelleryRoutes from "./routes/jewelleryRoutes.js";
 
 // ✅ Connect to MongoDB
 dbConnect(process.env.DBURL, process.env.DBNAME);
@@ -16,6 +17,7 @@ app.use(cors());
 // ✅ Routes
 app.use("/api/repair", repairRoutes);
 // app.use("/api/payment", paymentRoutes);
+app.use("/api/jewellery", jewelleryRoutes);
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`✅ Server running on port ${PORT}`));
