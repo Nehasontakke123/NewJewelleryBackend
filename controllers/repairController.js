@@ -20,29 +20,31 @@ export const createRepairRequest = async (req, res) => {
 };
 
 export const verifyOtp = async (req, res) => {
-    try {
+  try {
       const { phone, otp } = req.body;
-  
+
       if (!phone || !otp) {
-        return res.status(400).json({ message: "Phone and OTP are required" });
+          return res.status(400).json({ message: "Phone and OTP are required" });
       }
-  
-      const user = await User.findOne({ phone });
-  
-      if (!user) {
-        return res.status(404).json({ message: "User not found" });
+
+      // Find the repair request by phone number
+      const repairRequest = await Repair.findOne({ phoneNumber: phone });
+
+      if (!repairRequest) {
+          return res.status(404).json({ message: "Repair request not found" });
       }
-  
-      if (user.otp !== otp) {
-        return res.status(400).json({ message: "Invalid OTP" });
+
+      // Check if the OTP matches
+      if (repairRequest.otp !== otp) {
+          return res.status(400).json({ message: "Invalid OTP" });
       }
-  
+
       res.status(200).json({ message: "OTP Verified Successfully" });
-    } catch (error) {
+  } catch (error) {
       console.error("OTP Verification Error:", error);
       res.status(500).json({ message: "Internal Server Error" });
-    }
-  };
+  }
+};
 export const updateRepairStatus = async (req, res) => {
     const { id } = req.params;
     const { status } = req.body;
