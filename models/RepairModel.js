@@ -1,4 +1,4 @@
-import mongoose from 'mongoose';
+import mongoose from "mongoose";
 
 const repairSchema = new mongoose.Schema({
     customerName: String,
@@ -11,4 +11,4 @@ const repairSchema = new mongoose.Schema({
     createdAt: { type: Date, default: Date.now },
 });
 
-export default mongoose.model('Repair', repairSchema);
+export default mongoose.model("Repair", repairSchema);

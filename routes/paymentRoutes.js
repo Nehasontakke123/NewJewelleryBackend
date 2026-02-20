@@ -1,12 +1,12 @@
-// import express from "express";
-// import { createOrder, verifyPayment } from "../controllers/paymentController.js";
+import express from "express";
+import { createOrder, capturePayment } from "../controllers/paymentController.js";
 
-// const router = express.Router();
+const router = express.Router();
 
-// // ✅ Razorpay Order Creation
-// router.post("/order", createOrder);
+// Create Order
+router.post("/create-order", createOrder);
 
-// // ✅ Razorpay Payment Verification
-// router.post("/verify", verifyPayment);
+// Capture Payment
+router.post("/capture-payment", capturePayment);
 
-// export default router;
+export default router;

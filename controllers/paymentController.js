@@ -59,3 +59,44 @@
 //     res.status(500).json({ error: error.message });
 //   }
 // };
+
+
+
+
+
+
+
+import Razorpay from "razorpay";
+
+const razorpayInstance = new Razorpay({
+    key_id: process.env.RAZORPAY_KEY_ID,
+    key_secret: process.env.RAZORPAY_KEY_SECRET,
+});
+
+// Create order
+export const createOrder = async (req, res) => {
+    const { amount } = req.body;
+
+    try {
+        const order = await razorpayInstance.orders.create({
+            amount: amount * 100, // Razorpay expects amount in paise
+            currency: "INR",
+            receipt: "order_receipt_123",
+        });
+        res.status(201).json(order);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
+
+// Capture payment
+export const capturePayment = async (req, res) => {
+    const { payment_id, order_id } = req.body;
+
+    try {
+        const capture = await razorpayInstance.payments.capture(payment_id, order_id);
+        res.status(200).json(capture);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+};
